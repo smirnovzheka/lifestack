@@ -1,6 +1,6 @@
 from datetime import date, datetime
 
-from sqlalchemy import Boolean, Date, DateTime, ForeignKey, Integer, String, Text, func
+from sqlalchemy import Boolean, Date, DateTime, Float, ForeignKey, Integer, String, Text, func
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.db.base import Base
@@ -27,6 +27,7 @@ class RoutineLog(Base):
     routine_id: Mapped[int] = mapped_column(Integer, ForeignKey("routines.id"), nullable=False)
     date: Mapped[date] = mapped_column(Date, nullable=False)
     done: Mapped[bool] = mapped_column(Boolean, default=False)
+    value: Mapped[float | None] = mapped_column(Float)   # e.g. km run, calories
     note: Mapped[str | None] = mapped_column(Text)
 
     routine: Mapped["Routine"] = relationship("Routine", back_populates="logs")
