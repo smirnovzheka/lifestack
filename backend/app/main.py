@@ -4,6 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.config import settings
 from app.db.base import Base, engine
 import app.models  # noqa: F401 — register all models with Base
+from app.routers import projects
 
 app = FastAPI(title="LifeStack API", version="0.1.0")
 
@@ -19,6 +20,9 @@ app.add_middleware(
 @app.on_event("startup")
 async def startup():
     Base.metadata.create_all(bind=engine)
+
+
+app.include_router(projects.router, prefix="/api")
 
 
 @app.get("/health")

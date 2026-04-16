@@ -19,7 +19,6 @@ class Project(Base):
 
     tasks: Mapped[list["Task"]] = relationship("Task", back_populates="project", cascade="all, delete-orphan")
     notes: Mapped[list["Note"]] = relationship("Note", back_populates="project")
-    weekly_goals: Mapped[list["WeeklyGoal"]] = relationship("WeeklyGoal", back_populates="project")
 
 
 class Task(Base):
